@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Wedding Card</title><style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg,#f8f3ea,#e8dccc);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* ENVELOPE */
+.envelope {
+  width: 340px;
+  height: 220px;
+  position: relative;
+  cursor: pointer;
+}
+
+.flap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #d4b48c;
+  clip-path: polygon(0 0,100% 0,50% 60%);
+  transform-origin: top;
+  transition: 1s;
+  z-index: 3;
+}
+
+.pocket {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #caa47a;
+  border-radius: 10px;
+}
+
+/* CARD */
+.card {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+  background: white;
+  border-radius: 10px;
+  transform: translateY(0);
+  transition: 1s;
+  z-index: 2;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card.open {
+  transform: translateY(-250px);
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* BOOK */
+.book {
+  position: absolute;
+  width: 350px;
+  height: 600px;
+  transform-style: preserve-3d;
+  display: none;
+}
+
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.front img, .back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.flipped {
+  transform: rotateY(-180deg);
+}
+
+.page:nth-child(1){z-index:3}
+.page:nth-child(2){z-index:2}
+.page:nth-child(3){z-index:1}
+
+</style></head><body><div class="envelope" onclick="openEnvelope()">
+  <div class="flap"></div>
+  <div class="pocket"></div>
+  <div class="card" id="cardPreview"></div>
+</div><div class="book" id="book">  <div class="page" onclick="flip(this)">
+    <div class="front"><img src="https://photos.google.com/share/AF1QipP_CYpFrApyxu-jdsb1DnKIlkkPO-G7W0-wtC0J_j8M0x05lwE01UbeFwIrnESAQA/photo/AF1QipOXgOlKMi-pLijJviLpdwpiXBsaZKWRtTSbHn6Z?key=N2oyTmd2eDZlSktkZnVvZGF2cmtTdmhpOHl1S2FB"></div>
+    <div class="back"><img src="2222222222222"></div>
+  </div>  <div class="page" onclick="flip(this)">
+    <div class="front"><img src="33333333333"></div>
+    <div class="back"><img src="444444444444"></div>
+  </div>  <div class="page" onclick="flip(this)">
+    <div class="front"><img src="5555555555555"></div>
+    <div class="back"><img src="66666666"></div>
+  </div></div><script>
+function openEnvelope(){
+  const env = document.querySelector('.envelope');
+  const card = document.querySelector('.card');
+  const book = document.getElementById('book');
+
+  env.classList.add('open');
+  card.classList.add('open');
+
+  setTimeout(()=>{
+    env.style.display='none';
+    book.style.display='block';
+  },1000);
+}
+
+function flip(page){
+  page.classList.toggle('flipped');
+}
+</script></body>
+</html>
